@@ -29,6 +29,11 @@ variable "vpc_cidr" {
   type        = string
 }
 
+variable "region" {
+  description = "String representing the region the solution is deployed to"
+  type        = string
+}
+
 ### Create resources
 
 # Create VPC
@@ -104,7 +109,7 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {
-    Name = "${var.prefix}-public_rtb"
+    Name = "${var.prefix}-public-rtb"
   }
   depends_on = [aws_internet_gateway.igw]
 }
@@ -137,4 +142,13 @@ resource "aws_route_table_association" "private" {
   count          = length(aws_subnet.private)
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private[count.index].id
+}
+
+# create s3 gateway endpoint
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.region}.s3"
+  tags = {
+    Name = "${var.prefix}-s3-endpoint"
+  }
 }

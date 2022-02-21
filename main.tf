@@ -14,7 +14,7 @@ output "bucket_name_arn" {
   value       = ["${module.s3_bucket.s3_bucket_name_arn}"]
 }
 
-# create VPC, subnets, NAT gateways, etc
+# create VPC, subnets, NAT GWs, Internet GWs, route tables and S3 endpoint
 module "vpc" {
   source          = "./modules/vpc"
   prefix          = var.prefix
@@ -22,4 +22,5 @@ module "vpc" {
   subnets_private = var.subnets_private
   az              = var.az
   vpc_cidr        = var.vpc_cidr
+  region          = var.region
 }

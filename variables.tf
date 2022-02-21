@@ -44,3 +44,8 @@ variable "vpc_cidr" {
   description = "String representing the CIDR of the VPC CIDR block"
   type        = string
 }
+
+variable "region" {
+  description = "String representing the region the solution is deployed to"
+  type        = string
+}
