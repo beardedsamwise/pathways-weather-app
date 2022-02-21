@@ -39,3 +39,8 @@ variable "subnets_private" {
     cidr = string
   }))
 }
+
+variable "vpc_cidr" {
+  description = "String representing the CIDR of the VPC CIDR block"
+  type        = string
+}

@@ -24,20 +24,23 @@ variable "az" {
   type        = list(string)
 }
 
+variable "vpc_cidr" {
+  description = "String representing the CIDR of the VPC CIDR block"
+  type        = string
+}
+
 ### Create resources
 
 # Create VPC
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cidr
   instance_tenancy = "default"
   tags = {
     "Name" = "${var.prefix}-vpc"
   }
 }
 
-# For each type of subnet, ensure the number of AZs matches 
-# the number of subnets that you're trying to create        
-
+# For each type of subnet, create the same number of subnets as we have defined AZs
 # create public subnets 
 resource "aws_subnet" "public" {
   count = length(var.az)
@@ -72,16 +75,16 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# create elastic IP addresses for NGW
+# create elastic IP addresses for NGW (one per private subnet)
 resource "aws_eip" "ngw" {
-  count = length(var.az)
+  count = length(var.subnets_private)
   vpc      = true
   tags = {
     Name = "${var.prefix}-eip-${count.index}"
 }
 }
 
-# create NAT gateways
+# create NAT gateways (one per private subnet)
 resource "aws_nat_gateway" "ngw" {
   count = length(aws_subnet.public)
   allocation_id = aws_eip.ngw[count.index].id
@@ -92,7 +95,7 @@ resource "aws_nat_gateway" "ngw" {
   depends_on = [aws_internet_gateway.igw, aws_eip.ngw]
 }
 
-# create route tables
+# create public route table
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -101,11 +104,12 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {
-    Name = "${var.prefix}_public_rtb"
+    Name = "${var.prefix}-public_rtb"
   }
   depends_on = [aws_internet_gateway.igw]
 }
 
+# create private route tables (one per private subnet)
 resource "aws_route_table" "private" {
   count = length(aws_nat_gateway.ngw)
   vpc_id = aws_vpc.main.id
@@ -116,19 +120,19 @@ resource "aws_route_table" "private" {
   }
 
   tags = {
-    Name = "${var.prefix}_public_rtb"
+    Name = "${var.prefix}-private-rtb-${count.index}"
   }
   depends_on = [aws_nat_gateway.ngw]
 }
 
-# assosciate route tables with subnets
+# assosciate public route table with public subnets
 resource "aws_route_table_association" "public" {
   count          = length(aws_subnet.public)
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
 
-# assosciate route tables with subnets
+# assosciate private route tables with private subnets
 resource "aws_route_table_association" "private" {
   count          = length(aws_subnet.private)
   subnet_id      = aws_subnet.private[count.index].id

@@ -1,6 +1,7 @@
-bucket = "dojoweatherapp-sam"
-prefix = "sam-b"
-az     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+bucket   = "dojoweatherapp-sam"
+prefix   = "sam-b"
+az       = ["us-east-1a", "us-east-1b", "us-east-1c"]
+vpc_cidr = "10.0.0.0/16"
 subnets_public = [
   {
     name = "public-a"
