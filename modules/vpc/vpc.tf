@@ -106,20 +106,20 @@ resource "aws_route_table" "public" {
   depends_on = [aws_internet_gateway.igw]
 }
 
-# resource "aws_route_table" "private" {
-#   count = length(aws_nat_gateway)
-#   vpc_id = aws_vpc.main.id
+resource "aws_route_table" "private" {
+  count = length(aws_nat_gateway.ngw)
+  vpc_id = aws_vpc.main.id
 
-#   route {
-#     cidr_block = "0.0.0.0/0"
-#     gateway_id = aws_internet_gateway.ngw[count.index].id
-#   }
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.ngw[count.index].id
+  }
 
-#   tags = {
-#     Name = "${var.prefix}_public_rtb"
-#   }
-#   depends_on = [aws_nat_gateway.ngw]
-# }
+  tags = {
+    Name = "${var.prefix}_public_rtb"
+  }
+  depends_on = [aws_nat_gateway.ngw]
+}
 
 # assosciate route tables with subnets
 resource "aws_route_table_association" "public" {
@@ -128,4 +128,9 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-
+# assosciate route tables with subnets
+resource "aws_route_table_association" "private" {
+  count          = length(aws_subnet.private)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private[count.index].id
+}
