@@ -31,7 +31,7 @@ resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   instance_tenancy = "default"
   tags = {
-    "Name" = "${var.prefix}_vpc"
+    "Name" = "${var.prefix}-vpc"
   }
 }
 
@@ -68,7 +68,7 @@ resource "aws_subnet" "private" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "${var.prefix}_igw"
+    Name = "${var.prefix}-igw"
   }
 }
 
@@ -77,7 +77,7 @@ resource "aws_eip" "ngw" {
   count = length(var.az)
   vpc      = true
   tags = {
-    Name = "${var.prefix}_eip"
+    Name = "${var.prefix}-eip-${count.index}"
 }
 }
 
@@ -87,7 +87,7 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.ngw[count.index].id
   subnet_id = aws_subnet.public[count.index].id
   tags = {
-    Name = "${var.prefix}_eip"
+    Name = "${var.prefix}-ngw-${count.index}"
   } 
   depends_on = [aws_internet_gateway.igw, aws_eip.ngw]
 }
