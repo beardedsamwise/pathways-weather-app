@@ -110,7 +110,7 @@ resource "aws_route_table" "public" {
   }
   tags = {
     Name = "${var.prefix}-public-rtb"
-    S3-Endpoint = "true"
+    S3Endpoint = "true"
   }
   depends_on = [aws_internet_gateway.igw]
 }
@@ -127,7 +127,7 @@ resource "aws_route_table" "private" {
 
   tags = {
     Name = "${var.prefix}-private-rtb-${count.index}"
-    S3-Endpoint = "true"
+    S3Endpoint = "true"
   }
   depends_on = [aws_nat_gateway.ngw]
 }
@@ -151,7 +151,7 @@ data "aws_route_tables" "rts" {
   vpc_id = aws_vpc.main.id
 
   filter {
-    name   = "tag:S3-Endpoint"
+    name   = "tag:S3Endpoint"
     values = ["true"]
   }
   depends_on = [aws_route_table.private, aws_route_table.public]
@@ -165,4 +165,5 @@ resource "aws_vpc_endpoint" "s3" {
   tags = {
     Name = "${var.prefix}-s3-endpoint"
   }
+  depends_on = [aws_route_table.private, aws_route_table.public]
 }
