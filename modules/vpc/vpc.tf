@@ -154,6 +154,7 @@ data "aws_route_tables" "rts" {
     name   = "tag:S3-Endpoint"
     values = ["true"]
   }
+  depends_on = [aws_route_table.private, aws_route_table.public]
 }
 
 # create s3 gateway endpoint and associate to filtered route tables
