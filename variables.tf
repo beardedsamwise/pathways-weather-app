@@ -1,7 +1,7 @@
 variable "bucket" {
   type        = string
   description = "Specifies the name of an S3 Bucket"
-  default     = "dojoweather_sam_2022"
+  default     = "dojoweatherapp-sam"
 }
 
 variable "tags" {
