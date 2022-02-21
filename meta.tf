@@ -1,8 +1,13 @@
 terraform {
-  required_version = ">= 0.13.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
   backend "s3" {
     bucket = "pathways-dojo"
     key    = "beardedsamwise-tfstate-main"
-    region = "ap-northeast-1"
+    region = "us-east-1"
   }
 }
