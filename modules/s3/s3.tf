@@ -3,16 +3,16 @@ variable "bucket" {
   default     = ""
 }
 
-variable "tags" {
-  default     = {}
-}
+# variable "tags" {
+#   default     = {}
+# }
 
 ### Create Resources
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket
   acl    = "private"
 
-  tags   = var.tags
+  # tags   = var.tags
 }
 
 ### Define Output

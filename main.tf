@@ -2,7 +2,7 @@ module "s3_bucket" {
   source = "./modules/s3"
   bucket = var.bucket
 
-  tags = var.tags
+  # tags = var.tags
 }
 
 output "bucket_name" {
