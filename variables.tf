@@ -1,22 +1,16 @@
 variable "bucket" {
   type        = string
   description = "Specifies the name of an S3 Bucket"
-  default     = "dojostudent"
 }
 
 variable "prefix" {
   type        = string
-  description = "prefix for resource identification"
-  default     = "dojostudent"
+  description = "Prefix applied to all resources as tag:Name"
 }
 
 variable "tags" {
   type        = map(string)
-  description = "Use tags to identify project resources"
-  default = {
-    Owner   = "Sam Bentley"
-    Project = "Dojo Weather App"
-  }
+  description = "Tags to identify project resources"
 }
 
 variable "az" {
@@ -42,10 +36,5 @@ variable "subnets_private" {
 
 variable "vpc_cidr" {
   description = "String representing the CIDR of the VPC CIDR block"
-  type        = string
-}
-
-variable "region" {
-  description = "String representing the region the solution is deployed to"
   type        = string
 }

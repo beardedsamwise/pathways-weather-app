@@ -22,5 +22,4 @@ module "vpc" {
   subnets_private = var.subnets_private
   az              = var.az
   vpc_cidr        = var.vpc_cidr
-  region          = var.region
 }

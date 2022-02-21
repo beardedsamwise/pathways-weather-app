@@ -1,6 +1,6 @@
 ### Define Variables
 variable "prefix" {
-  default     = "dojostudent"
+  description = "Prefix applied to all resources as tag:Name"
 }
 
 variable "subnets_public" {
@@ -29,10 +29,10 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "region" {
-  description = "String representing the region the solution is deployed to"
-  type        = string
-}
+# variable "region" {
+#   description = "String representing the region the solution is deployed to"
+#   type        = string
+# }
 
 ### Create resources
 
@@ -146,7 +146,7 @@ resource "aws_route_table_association" "private" {
   route_table_id = aws_route_table.private[count.index].id
 }
 
-# filter for all route tables tagged with S3-Endpoint = true
+# filter for all route tables tagged with S3Endpoint = true
 data "aws_route_tables" "rts" {
   vpc_id = aws_vpc.main.id
 
@@ -156,12 +156,16 @@ data "aws_route_tables" "rts" {
   }
 }
 
-# create s3 gateway endpoint and associate to filtered route tables
+# create data source to gather region
+data "aws_region" "current" {}
+
+# create S3 gateway endpoint and associate to tagged route tables
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.region}.s3"
+  service_name = "com.amazonaws.${data.aws_region.current.name}.s3"
   route_table_ids = flatten("${data.aws_route_tables.rts.*.ids}")
   tags = {
     Name = "${var.prefix}-s3-endpoint"
   }
 }
+
