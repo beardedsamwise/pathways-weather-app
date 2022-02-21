@@ -132,34 +132,35 @@ resource "aws_route_table" "private" {
   depends_on = [aws_nat_gateway.ngw]
 }
 
-# assosciate public route table with public subnets
+# associate public route table with public subnets
 resource "aws_route_table_association" "public" {
   count          = length(aws_subnet.public)
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
 
-# assosciate private route tables with private subnets
+# associate private route tables with private subnets
 resource "aws_route_table_association" "private" {
   count          = length(aws_subnet.private)
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private[count.index].id
 }
 
-# create s3 gateway endpoint
-# data "aws_route_tables" "rts" {
-#   vpc_id = aws_vpc.main.id
+# filter for all route tables tagged with S3-Endpoint = true
+data "aws_route_tables" "rts" {
+  vpc_id = aws_vpc.main.id
 
-#   filter {
-#     name   = "tag:S3-Endpoint"
-#     values = ["true"]
-#   }
-# }
+  filter {
+    name   = "tag:S3-Endpoint"
+    values = ["true"]
+  }
+}
 
+# create s3 gateway endpoint and associate to filtered route tables
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.region}.s3"
-  #route_table_ids = flatten("${data.aws_route_tables.rts.*.ids}")
+  route_table_ids = flatten("${data.aws_route_tables.rts.*.ids}")
   tags = {
     Name = "${var.prefix}-s3-endpoint"
   }
