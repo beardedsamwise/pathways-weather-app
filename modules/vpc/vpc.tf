@@ -110,7 +110,7 @@ resource "aws_route_table" "public" {
   }
   tags = {
     Name = "${var.prefix}-public-rtb"
-    S3_Endpoint = "true"
+    S3-Endpoint = "true"
   }
   depends_on = [aws_internet_gateway.igw]
 }
