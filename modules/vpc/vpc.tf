@@ -145,9 +145,19 @@ resource "aws_route_table_association" "private" {
 }
 
 # create s3 gateway endpoint
+data "aws_route_tables" "rts" {
+  vpc_id = aws_vpc.main.id
+
+  filter {
+    name   = "tag:Project"
+    values = ["Dojo Weather App"]
+  }
+}
+
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.region}.s3"
+  route_table_ids = data.aws_route_tables.rts.*.id
   tags = {
     Name = "${var.prefix}-s3-endpoint"
   }
