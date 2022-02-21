@@ -110,6 +110,7 @@ resource "aws_route_table" "public" {
   }
   tags = {
     Name = "${var.prefix}-public-rtb"
+    S3_Endpoint = "true"
   }
   depends_on = [aws_internet_gateway.igw]
 }
@@ -126,6 +127,7 @@ resource "aws_route_table" "private" {
 
   tags = {
     Name = "${var.prefix}-private-rtb-${count.index}"
+    S3-Endpoint = "true"
   }
   depends_on = [aws_nat_gateway.ngw]
 }
@@ -145,19 +147,19 @@ resource "aws_route_table_association" "private" {
 }
 
 # create s3 gateway endpoint
-data "aws_route_tables" "rts" {
-  vpc_id = aws_vpc.main.id
+# data "aws_route_tables" "rts" {
+#   vpc_id = aws_vpc.main.id
 
-  filter {
-    name   = "tag:Project"
-    values = ["Dojo Weather App"]
-  }
-}
+#   filter {
+#     name   = "tag:S3-Endpoint"
+#     values = ["true"]
+#   }
+# }
 
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.region}.s3"
-  route_table_ids = data.aws_route_tables.rts.*.id
+  #route_table_ids = flatten("${data.aws_route_tables.rts.*.ids}")
   tags = {
     Name = "${var.prefix}-s3-endpoint"
   }
