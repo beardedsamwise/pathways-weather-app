@@ -1,7 +1,13 @@
 variable "bucket" {
   type        = string
   description = "Specifies the name of an S3 Bucket"
-  default     = "dojoweatherapp-sam"
+  default     = "dojostudent"
+}
+
+variable "prefix" {
+  type        = string
+  description = "prefix for resource identification"
+  default     = "dojostudent"
 }
 
 variable "tags" {
@@ -11,4 +17,25 @@ variable "tags" {
     Owner   = "Sam Bentley"
     Project = "Dojo Weather App"
   }
+}
+
+variable "az" {
+  description = "List of availability zones to deploy subnets to"
+  type        = list(string)
+}
+
+variable "subnets_public" {
+  description = "Object list of public subnets for deployment"
+  type = list(object({
+    name = string
+    cidr = string
+  }))
+}
+
+variable "subnets_private" {
+  description = "Object list of private subnets for deployment"
+  type = list(object({
+    name = string
+    cidr = string
+  }))
 }

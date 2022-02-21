@@ -1,8 +1,7 @@
+# create S3 bucket
 module "s3_bucket" {
   source = "./modules/s3"
   bucket = var.bucket
-
-  # tags = var.tags
 }
 
 output "bucket_name" {
@@ -13,4 +12,13 @@ output "bucket_name" {
 output "bucket_name_arn" {
   description = "The name of the bucket"
   value       = ["${module.s3_bucket.s3_bucket_name_arn}"]
+}
+
+# create VPC, subnets, NAT gateways, etc
+module "vpc" {
+  source          = "./modules/vpc"
+  prefix          = var.prefix
+  subnets_public  = var.subnets_public
+  subnets_private = var.subnets_private
+  az              = var.az
 }
