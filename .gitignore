@@ -50,3 +50,7 @@ node_modules/
 
 # Optional npm cache directory
 .npm
+
+# VS Code
+
+.vscode/
