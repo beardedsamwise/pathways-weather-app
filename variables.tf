@@ -7,8 +7,8 @@ variable "bucket" {
 variable "tags" {
   type        = map(string)
   description = "Use tags to identify project resources"
-  default     = {
-    Owner = "Sam Bentley"
+  default = {
+    Owner   = "Sam Bentley"
     Project = "Dojo Weather App"
   }
 }
