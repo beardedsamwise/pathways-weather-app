@@ -9,7 +9,7 @@ on:
 jobs:
   terraform_plan:
     runs-on: ubuntu-latest
-    working-directory: infrastructure
+    
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -17,6 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Terraform_Plan
+      working-directory: ./infrastructure
       run: make run_plan       
 
   terraform_apply:
@@ -24,7 +25,6 @@ jobs:
       name: approval
     needs: terraform_plan
     runs-on: ubuntu-latest
-    working-directory: infrastructure
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -32,8 +32,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Terraform_Plan
+      working-directory: ./infrastructure
       run: make run_plan
     - name: Terraform_Apply
+      working-directory: ./infrastructure
       run: make run_apply  
 
 
