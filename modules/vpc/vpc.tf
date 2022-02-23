@@ -1,6 +1,7 @@
 ### Define Variables
 variable "prefix" {
   description = "Prefix applied to all resources as tag:Name"
+  type = string
 }
 
 variable "subnets_public" {
