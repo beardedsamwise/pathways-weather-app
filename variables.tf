@@ -39,7 +39,7 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "ecr_name" {
+variable "git_username" {
   description = "Name of the deployed ECR repo"
   type        = string
 }
