@@ -5,6 +5,7 @@ on:
       - master
     paths:
       - 'infrastructure/**'
+      - '.github/workflows/main.yml'
       
 jobs:
   terraform_plan:
