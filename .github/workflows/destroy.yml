@@ -5,11 +5,11 @@ on:
       - destroy
     paths:
       - 'infrastructure/**'
+      - '.github/workflows/destroy.yml'
 
 jobs:
   terraform_destroy_plan:
     runs-on: ubuntu-latest
-    working-directory: infrastructure
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -17,6 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Terraform_Destroy_Plan
+      working-directory: ./infrastructure
       run: make run_destroy_plan       
 
   terraform_destroy_apply:
@@ -24,7 +25,6 @@ jobs:
       name: approval
     needs: terraform_destroy_plan
     runs-on: ubuntu-latest
-    working-directory: infrastructure
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -32,4 +32,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Terraform_Destroy_Apply
+      working-directory: ./infrastructure
       run: make run_destroy_apply 
