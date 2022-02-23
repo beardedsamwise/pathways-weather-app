@@ -1,4 +1,4 @@
-name: App-Deploy
+name: Weather-App-Build
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Push image to Docker Hub
+    name: Build and push image to ECR
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
 
-      - name: Build Docker image
+      - name: Build weather-app image
         working-directory: ./application
         env:
           ACCOUNTID: ${{ secrets.ACCOUNTID }}
@@ -34,7 +34,7 @@ jobs:
           REPONAME: ${{ secrets.REPONAME }}
         run: make build
 
-      - name: Push image to Docker Hub
+      - name: Push weather-app image to ECR
         working-directory: ./application
         env:
           ACCOUNTID: ${{ secrets.ACCOUNTID }}
