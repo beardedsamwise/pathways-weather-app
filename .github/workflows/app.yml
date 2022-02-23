@@ -35,7 +35,7 @@ jobs:
         run: make build
 
       - name: Push image to Docker Hub
-        working-directory: beardedsamwise/c05-actions-02/
+        working-directory: ./application
         env:
           ACCOUNTID: ${{ secrets.ACCOUNTID }}
           AWSREGION: ${{ secrets.AWSREGION }}
