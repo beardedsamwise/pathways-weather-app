@@ -52,5 +52,7 @@ node_modules/
 .npm
 
 # VS Code
-
 .vscode/
+
+# Mac OS
+.DS_Store

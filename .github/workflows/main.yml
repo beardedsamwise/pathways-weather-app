@@ -4,15 +4,12 @@ on:
     branches:
       - master
     paths:
-      - 'docker-compose.yml'
-      - 'Makefile'
-      - '.github/workflows/**'
-      - '*dockerfile'
-      - 'modules/**'
-      - '**.tf'
+      - 'infrastructure/**'
+      
 jobs:
   terraform_plan:
     runs-on: ubuntu-latest
+    working-directory: infrastructure
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -27,6 +24,7 @@ jobs:
       name: approval
     needs: terraform_plan
     runs-on: ubuntu-latest
+    working-directory: infrastructure
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
