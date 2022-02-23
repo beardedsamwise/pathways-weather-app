@@ -25,8 +25,9 @@ module "vpc" {
 }
 
 # create ECR and ECS instances
-module "ecs-ecr" {
-  source       = "./modules/ecs-ecr"
+module "weather-app" {
+  source       = "./modules/weather-app"
   prefix       = var.prefix
   git_username = var.git_username
+  vpc_id       = module.vpc.vpc_id
 }

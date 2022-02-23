@@ -170,3 +170,8 @@ resource "aws_vpc_endpoint" "s3" {
   }
 }
 
+# define outputs
+output "vpc_id" {
+  description = "The ID of the VPC deployed"
+  value       = aws_vpc.main.id
+}
