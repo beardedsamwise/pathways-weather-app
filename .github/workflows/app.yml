@@ -1,0 +1,34 @@
+name: App-Deploy
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'application/**'
+      - '.github/workflows/app.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Push image to Docker Hub
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Log in to ECR
+        working-directory: ./application
+        run: make login
+        env:
+          ACCOUNTID: ${{ secrets.ACCOUNTID }}
+          AWSREGION: ${{ secrets.AWSREGION }}
+          REPONAME: ${{ secrets.REPONAME }}
+
+      - name: Build Docker image
+        working-directory: ./application
+        run: make build
+
+      - name: Push image to Docker Hub
+        working-directory: beardedsamwise/c05-actions-02/
+        run: make push
+
+
