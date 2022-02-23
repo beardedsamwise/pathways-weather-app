@@ -28,10 +28,18 @@ jobs:
 
       - name: Build Docker image
         working-directory: ./application
+        env:
+          ACCOUNTID: ${{ secrets.ACCOUNTID }}
+          AWSREGION: ${{ secrets.AWSREGION }}
+          REPONAME: ${{ secrets.REPONAME }}
         run: make build
 
       - name: Push image to Docker Hub
         working-directory: beardedsamwise/c05-actions-02/
+        env:
+          ACCOUNTID: ${{ secrets.ACCOUNTID }}
+          AWSREGION: ${{ secrets.AWSREGION }}
+          REPONAME: ${{ secrets.REPONAME }}
         run: make push
 
 
