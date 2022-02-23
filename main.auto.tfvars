@@ -34,3 +34,4 @@ subnets_private = [
     cidr = "10.0.52.0/26"
   },
 ]
+ecr_name = "beardedsamwise-node-weather-app"

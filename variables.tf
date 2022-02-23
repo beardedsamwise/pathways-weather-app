@@ -38,3 +38,8 @@ variable "vpc_cidr" {
   description = "String representing the CIDR of the VPC CIDR block"
   type        = string
 }
+
+variable "ecr_name" {
+  description = "Name of the deployed ECR repo"
+  type        = string
+}
