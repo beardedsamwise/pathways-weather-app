@@ -1,6 +1,6 @@
 # create ECS instances
 resource "aws_ecs_cluster" "weather-app" {
-  name = "${prefix}-weather-app-cluster"
+  name = "${var.prefix}-weather-app-cluster"
 
   setting {
     name  = "containerInsights"
