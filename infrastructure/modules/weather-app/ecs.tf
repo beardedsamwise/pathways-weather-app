@@ -17,20 +17,24 @@ resource "aws_ecs_task_definition" "service" {
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecs.arn
   
-  container_definitions = jsonencode(
-    [{
-        "family": "beardedsamwise-weather-app-fam",
+  container_definitions = <<TASK_DEFINITION
+  [
+    {
+        "executionRoleArn": "arn:aws:iam::152848913167:role/ecsTaskExecutionRole",
         "containerDefinitions": [{
-            "name": "beardedsamwise-node-weather-app",
-            "image": "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app",
             "portMappings": [{
                 "protocol": "tcp",
                 "containerPort": 3000
             }],
-            "cpu": 0
-        }]
-    }]
-  )
+            "cpu": 0,
+            "image": "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1",
+            "name": "beardedsamwise-node-weather-app"
+        }],
+        "taskRoleArn": "arn:aws:iam::152848913167:role/beardedsamwiseEcsExecutionRole",
+        "compatibilities": ["FARGATE"]
+    }
+  ]
+  TASK_DEFINITION
 }
 
 # create ECS service
