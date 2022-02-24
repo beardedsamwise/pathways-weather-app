@@ -22,19 +22,13 @@ resource "aws_ecs_task_definition" "service" {
 [
 {
     "family": "weather-app-fam",
-    "containerDefinitions": [
-        {
-            "name": "weather-app",
-            "image": "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1",
-            "portMappings": [
-                {
-                    "protocol": "tcp",
-                    "containerPort": 3000
-                }
-            ],
-            "cpu": 0
-            }
-   ],
+    "portMappings": [
+    {
+        "protocol": "tcp",
+        "containerPort": 3000
+    }],
+    "name": "weather-app",
+    "image": "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1",   
     "memory": 512,
     "cpu": 256,
     "requiresCompatibilities": [
