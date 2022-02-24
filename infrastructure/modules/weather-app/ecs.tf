@@ -10,18 +10,11 @@ resource "aws_ecs_cluster" "weather-app" {
 
 # create task definition
 resource "aws_ecs_task_definition" "service" {
-  family = "weather-app-fam"
-  #memory = "512"
-  #cpu = "256"
-  #requires_compatibilities = ["FARGATE"]
-  #network_mode = "awsvpc"
-  #execution_role_arn = aws_iam_role.ecs.arn
-  #container_name = "beardedsamwise-node-weather-app"
-  
+  family = "${var.prefix}-weather-app-fam"
+
   container_definitions = jsonencode(
 [
 {
-    "family": "${var.prefix}-weather-app-fam",
     "portMappings": [
     {
         "protocol": "tcp",
