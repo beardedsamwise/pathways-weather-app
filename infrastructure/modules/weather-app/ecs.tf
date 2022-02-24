@@ -11,7 +11,10 @@ resource "aws_ecs_cluster" "weather-app" {
 # create task definition
 resource "aws_ecs_task_definition" "service" {
   family = "${var.prefix}-weather-app-fam"
-
+  network_mode = "awsvpc"
+  execution_role_arn = aws_iam_role.ecs.arn
+  cpu = 256
+  memory = 512
   container_definitions = jsonencode(
 [
 {
@@ -26,9 +29,7 @@ resource "aws_ecs_task_definition" "service" {
     "cpu": 256,
     "requiresCompatibilities": [
         "FARGATE"
-    ],
-    "networkMode": "awsvpc",
-    "executionRoleArn": "${aws_iam_role.ecs.arn}"
+    ]
 }
 ]
   )
