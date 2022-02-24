@@ -10,31 +10,41 @@ resource "aws_ecs_cluster" "weather-app" {
 
 # create task definition
 resource "aws_ecs_task_definition" "service" {
-  family = "service"
-  memory = "512"
-  cpu = "256"
-  requires_compatibilities = ["FARGATE"]
-  network_mode = "awsvpc"
-  execution_role_arn = aws_iam_role.ecs.arn
+  family = "weather-app-fam"
+  #memory = "512"
+  #cpu = "256"
+  #requires_compatibilities = ["FARGATE"]
+  #network_mode = "awsvpc"
+  #execution_role_arn = aws_iam_role.ecs.arn
+  #container_name = "beardedsamwise-node-weather-app"
   
-  container_definitions = <<TASK_DEFINITION
-  [
-    {
-        "executionRoleArn": "arn:aws:iam::152848913167:role/ecsTaskExecutionRole",
-        "containerDefinitions": [{
-            "portMappings": [{
-                "protocol": "tcp",
-                "containerPort": 3000
-            }],
-            "cpu": 0,
+  container_definitions = jsonencode(
+[
+{
+    "family": "weather-app-fam",
+    "containerDefinitions": [
+        {
+            "name": "weather-app",
             "image": "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1",
-            "name": "beardedsamwise-node-weather-app"
-        }],
-        "taskRoleArn": "arn:aws:iam::152848913167:role/beardedsamwiseEcsExecutionRole",
-        "compatibilities": ["FARGATE"]
-    }
-  ]
-  TASK_DEFINITION
+            "portMappings": [
+                {
+                    "protocol": "tcp",
+                    "containerPort": 3000
+                }
+            ],
+            "cpu": 0
+            }
+   ],
+    "memory": 512,
+    "cpu": 256,
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "executionRoleArn": "arn:aws:iam::152848913167:role/beardedsamwiseEcsExecutionRole"
+}
+]
+  )
 }
 
 # create ECS service
