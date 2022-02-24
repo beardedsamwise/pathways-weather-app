@@ -29,6 +29,13 @@ resource "aws_security_group" "ecs" {
     protocol         = "tcp"
     security_groups  = [aws_security_group.alb.id]
   }
+  egress {
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "allow all outbound"
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+  }
 
   tags = {
     Name = "${var.prefix}-ecs-sg"
