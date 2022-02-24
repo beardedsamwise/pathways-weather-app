@@ -27,3 +27,8 @@ variable "logging_bucket" {
   description = "Bucket to send ALB access logs to"
   type = string
 }
+
+variable "image_id" {
+  description = "URI of the Container Image stored in ECR "
+  type = string
+}

@@ -24,7 +24,7 @@ module "vpc" {
   vpc_cidr        = var.vpc_cidr
 }
 
-# create ECR, ECS and ALB instances to deploy weather-app
+# create ECR, ECS and ALB instances to deploy weather-app to Fargate
 module "weather-app" {
   source             = "./modules/weather-app"
   prefix             = var.prefix
@@ -33,5 +33,6 @@ module "weather-app" {
   public_subnet_id_0 = module.vpc.public_subnet_id_0
   public_subnet_id_1 = module.vpc.public_subnet_id_1
   logging_bucket     = module.s3_bucket.s3_bucket_name
+  image_id           = var.image_id
 }
 

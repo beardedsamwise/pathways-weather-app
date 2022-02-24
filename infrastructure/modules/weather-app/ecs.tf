@@ -21,21 +21,21 @@ resource "aws_ecs_task_definition" "service" {
   container_definitions = jsonencode(
 [
 {
-    "family": "weather-app-fam",
+    "family": "${var.prefix}-weather-app-fam",
     "portMappings": [
     {
         "protocol": "tcp",
         "containerPort": 3000
     }],
     "name": "weather-app",
-    "image": "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1",   
+    "image": "${var.image_id}",   
     "memory": 512,
     "cpu": 256,
     "requiresCompatibilities": [
         "FARGATE"
     ],
     "networkMode": "awsvpc",
-    "executionRoleArn": "arn:aws:iam::152848913167:role/beardedsamwiseEcsExecutionRole"
+    "executionRoleArn": "${aws_iam_role.ecs.arn}"
 }
 ]
   )

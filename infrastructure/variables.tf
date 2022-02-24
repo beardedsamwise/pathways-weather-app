@@ -43,3 +43,8 @@ variable "git_username" {
   description = "Name of the deployed ECR repo"
   type        = string
 }
+
+variable "image_id" {
+  description = "URI of the Container Image stored in ECR "
+  type        = string
+}
