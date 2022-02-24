@@ -20,12 +20,6 @@ resource "aws_lb" "weather-app" {
 
   enable_deletion_protection = true
 
-  access_logs {
-    bucket  = var.logging_bucket
-    prefix  = "test-lb"
-    enabled = true
-  }
-
   tags = {
     Name = "${var.prefix}-alb"
   }

@@ -1,6 +1,6 @@
 # create ECS instances
 resource "aws_ecs_cluster" "weather-app" {
-  name = "weather-app-cluster"
+  name = "${prefix}-weather-app-cluster"
 
   setting {
     name  = "containerInsights"
@@ -16,11 +16,12 @@ resource "aws_ecs_task_definition" "service" {
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecs.arn
+  
   container_definitions = jsonencode(
     [{
         "family": "beardedsamwise-weather-app-fam",
         "containerDefinitions": [{
-            "name": "weather-app",
+            "name": "beardedsamwise-node-weather-app",
             "image": "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1",
             "portMappings": [{
                 "protocol": "tcp",
