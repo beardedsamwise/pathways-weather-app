@@ -13,19 +13,14 @@ variable "vpc_id" {
   type = string
 }
 
-variable "public_subnet_id_0" {
+variable "public_subnet_ids" {
   description = "ID of the first public subne to deploy the ALB to"
-  type = string  
+  type        = list(string)
 }
 
-variable "public_subnet_id_1" {
-  description = "ID of the second public subne to deploy the ALB to"
-  type = string  
-}
-
-variable "logging_bucket" {
-  description = "Bucket to send ALB access logs to"
-  type = string
+variable "private_subnet_ids" {
+  description = "ID of the first public subne to deploy the ALB to"
+  type        = list(string)
 }
 
 variable "image_id" {

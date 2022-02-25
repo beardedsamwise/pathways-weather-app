@@ -48,3 +48,4 @@ variable "image_id" {
   description = "URI of the Container Image stored in ECR "
   type        = string
 }
+

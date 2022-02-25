@@ -30,9 +30,8 @@ module "weather-app" {
   prefix             = var.prefix
   git_username       = var.git_username
   vpc_id             = module.vpc.vpc_id
-  public_subnet_id_0 = module.vpc.public_subnet_id_0
-  public_subnet_id_1 = module.vpc.public_subnet_id_1
-  logging_bucket     = module.s3_bucket.s3_bucket_name
+  public_subnet_ids  = module.vpc.public_subnet_ids
+  private_subnet_ids = module.vpc.private_subnet_ids
   image_id           = var.image_id
 }
 

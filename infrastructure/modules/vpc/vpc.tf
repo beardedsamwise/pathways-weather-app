@@ -175,12 +175,13 @@ output "vpc_id" {
   description = "The ID of the VPC deployed"
   value       = aws_vpc.main.id
 }
-output "public_subnet_id_0" {
+output "public_subnet_ids" {
   description = "ID of the first public subnet"
-  value       = aws_subnet.public[0].id
+  value       = aws_subnet.public.*.id
 }
-output "public_subnet_id_1" {
+output "private_subnet_ids" {
   description = "ID of the first public subnet"
-  value       = aws_subnet.public[2].id
+  value       = aws_subnet.private.*.id
 }
+
 

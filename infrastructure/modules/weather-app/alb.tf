@@ -16,7 +16,7 @@ resource "aws_lb" "weather-app" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = [var.public_subnet_id_0, var.public_subnet_id_1]
+  subnets            = [var.public_subnet_ids[0], var.public_subnet_ids[1]]
 
   enable_deletion_protection = true
 
