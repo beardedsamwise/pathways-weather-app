@@ -41,7 +41,7 @@ resource "aws_ecs_service" "weather-app" {
   cluster         = aws_ecs_cluster.weather-app.id
   task_definition = aws_ecs_task_definition.weather-app.arn
   desired_count   = 1
-  iam_role        = aws_iam_role.ecs.arn
+  #iam_role        = aws_iam_role.ecs.arn
   depends_on      = [aws_iam_role.ecs, aws_iam_policy.ecs, aws_ecs_task_definition.weather-app]
 
   load_balancer {
