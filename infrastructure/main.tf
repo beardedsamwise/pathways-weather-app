@@ -1,17 +1,9 @@
+### CREATE RESOURCES
+
 # create S3 bucket
 module "s3_bucket" {
   source = "./modules/s3"
   bucket = var.bucket
-}
-
-output "bucket_name" {
-  description = "The name of the bucket"
-  value       = ["${module.s3_bucket.s3_bucket_name}"]
-}
-
-output "bucket_name_arn" {
-  description = "The name of the bucket"
-  value       = ["${module.s3_bucket.s3_bucket_name_arn}"]
 }
 
 # create VPC, subnets, NAT GWs, Internet GWs, route tables and S3 endpoint
@@ -35,3 +27,19 @@ module "weather-app" {
   image_id           = var.image_id
 }
 
+### GENERATE OUTPUTS
+
+output "bucket_name" {
+  description = "The name of the bucket"
+  value       = ["${module.s3_bucket.s3_bucket_name}"]
+}
+
+output "bucket_name_arn" {
+  description = "The name of the bucket"
+  value       = ["${module.s3_bucket.s3_bucket_name_arn}"]
+}
+
+output "alb_fqdn" {
+  description = "FQDN of the ALB"
+  value       = ["${module.weather-app.alb_fqdn}"]
+}

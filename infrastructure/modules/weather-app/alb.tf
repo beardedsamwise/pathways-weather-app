@@ -36,3 +36,10 @@ resource "aws_lb_listener" "weather-app" {
     target_group_arn = aws_lb_target_group.weather-app.arn
   }
 }
+
+### GENERATE OUTPUTS
+
+output "alb_fqdn" {
+  description = "FQDN of the ALB"
+  value = aws_lb.weather-app.dns_name
+}
