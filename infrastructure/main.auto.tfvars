@@ -36,3 +36,4 @@ subnets_private = [
 ]
 git_username = "beardedsamwise"
 image_id     = "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1"
+app_name     = "weather-app"

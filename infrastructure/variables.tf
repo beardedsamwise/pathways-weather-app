@@ -49,3 +49,7 @@ variable "image_id" {
   type        = string
 }
 
+variable "app_name" {
+  description = "Name of the application that is being deployed"
+  type        = string
+}

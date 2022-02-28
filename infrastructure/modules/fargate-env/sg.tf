@@ -1,7 +1,7 @@
 # create security groups for ECS and ALB
 resource "aws_security_group" "alb" {
-  name        = "weather-app-alb-sg"
-  description = "weather-app-alb-sg"
+  name        = "${var.app_name}-alb-sg"
+  description = "${var.app_name}-alb-sg"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -25,8 +25,8 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_security_group" "ecs" {
-  name        = "weather-app-ecs-sg"
-  description = "weather-app-ecs-sg"
+  name        = "${var.app_name}-ecs-sg"
+  description = "${var.app_name}-ecs-sg"
   vpc_id      = var.vpc_id
 
   ingress {

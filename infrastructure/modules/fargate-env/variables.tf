@@ -27,3 +27,8 @@ variable "image_id" {
   description = "URI of the Container Image stored in ECR "
   type = string
 }
+
+variable "app_name" {
+  description = "Name of the application that is being deployed"
+  type = string
+}
