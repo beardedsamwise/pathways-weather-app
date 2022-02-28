@@ -18,8 +18,6 @@ resource "aws_lb" "app" {
   security_groups    = [aws_security_group.alb.id]
   subnets            = [var.public_subnet_ids[0], var.public_subnet_ids[1]]
 
-  enable_deletion_protection = true
-
   tags = {
     Name = "${var.prefix}-alb"
   }
