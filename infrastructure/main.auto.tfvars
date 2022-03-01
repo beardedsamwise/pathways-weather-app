@@ -41,3 +41,4 @@ container_port = 3000
 task_mem       = 512
 task_cpu       = 256
 desired_count  = 1
+domain         = "beardedsamwise.co"

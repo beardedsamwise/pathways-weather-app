@@ -73,3 +73,8 @@ variable "desired_count" {
   description = "The desired number of container instances to instantiate"
   type        = number
 }
+
+variable "domain" {
+    description = "Top level domain to create the DNS record in"
+    type = string
+}

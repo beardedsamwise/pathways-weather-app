@@ -35,6 +35,6 @@ module "weather-app" {
 # create DNS record for beardedsamwise.co
 module "dns" {
   source = "./modules/dns"
-  domain = "beardedsamwise.co"
+  domain = var.domain
   fqdn   = module.weather-app.alb_fqdn
 }
