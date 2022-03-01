@@ -5,4 +5,5 @@ provider "aws" {
   }
 }
 provider "godaddy" {
+  host = "https://api.godaddy.com"
 }

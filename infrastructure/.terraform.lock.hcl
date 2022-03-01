@@ -25,6 +25,7 @@ provider "registry.terraform.io/sigmadigitalza/godaddy-domains" {
   version = "0.2.0"
   hashes = [
     "h1:Nk/B08Z0e8ceUi1xTahyz+f9l98BOVqK9NMP+XCXW6E=",
+    "h1:skfSw4SfFCFMFHohplkU9Mihq0HQk6Cfxd8pAmfgBVQ=",
     "zh:12926b413843fcd52fe2177299ba79fb0be6a82ec6a8b577ab1df24c84d61c20",
     "zh:1cdea8afe5a6af173bf9c2d816d4550e4df0c6173ea8b5426a3e1f6848858a4d",
     "zh:2efdc214ae9bb120ce27e1d5463ed82cc014ba37915984b51bef47d592b1df13",
