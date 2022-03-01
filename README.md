@@ -20,6 +20,12 @@ The application is now fully deployed and available at: [www.beardedsamwise.co](
 
 <br> 
 
+## Architecture
+
+The high level architecture of the solution is as follows. The ALB and ECS instances each have a different security group attached allowing HTTP inbound to the ALB from anywhere, and TCP 3000 from the ALB. For more information refer to [sg.tf](/infrastructure/modules/fargate-env/sg.tf).
+
+![Network Diagram](/images/weather_app_diagram.png)
+
 ## Working locally with Terraform
 
 The provided `makefile`, `dockerfile` , and `docker-compose.yml` files in the `Infrastructure` directory work together to create a docker container which is used to run Terraform deployments and other supported commands. It expects AWS account credentials and Go Daddy API credentials (`GODADDY_KEY` and `GODADDY_SECRET`) to be passed as environment variables. 
