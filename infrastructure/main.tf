@@ -26,4 +26,7 @@ module "weather-app" {
   private_subnet_ids = module.vpc.private_subnet_ids
   image_id           = var.image_id
   app_name           = var.app_name
+  container_port     = var.container_port
+  task_mem           = var.task_mem
+  task_cpu           = var.task_cpu
 }

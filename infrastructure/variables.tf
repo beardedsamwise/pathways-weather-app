@@ -53,3 +53,18 @@ variable "app_name" {
   description = "Name of the application that is being deployed"
   type        = string
 }
+
+variable "container_port" {
+  description = "Port that the container application is listening on"
+  type        = number
+}
+
+variable "task_cpu" {
+  description = "The hard limit of CPU units to present to the ECS task"
+  type        = number
+}
+
+variable "task_mem" {
+  description = "The hard limit of memory units to present to the ECS task"
+  type        = number
+}

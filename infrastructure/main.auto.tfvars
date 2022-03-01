@@ -34,6 +34,9 @@ subnets_private = [
     cidr = "10.0.52.0/26"
   },
 ]
-git_username = "beardedsamwise"
-image_id     = "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1"
-app_name     = "weather-app"
+git_username   = "beardedsamwise"
+image_id       = "152848913167.dkr.ecr.us-east-1.amazonaws.com/beardedsamwise-node-weather-app:1"
+app_name       = "weather-app"
+container_port = 3000
+task_mem       = 512
+task_cpu       = 256

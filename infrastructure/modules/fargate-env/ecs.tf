@@ -13,20 +13,18 @@ resource "aws_ecs_task_definition" "app" {
   family = "${var.prefix}-${var.app_name}-fam"
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecs.arn
-  cpu = 256
-  memory = 512
+  cpu = var.task_cpu
+  memory = var.task_mem
   container_definitions = jsonencode(
 [
 {
     "portMappings": [
     {
         "protocol": "tcp",
-        "containerPort": 3000
+        "containerPort": "${var.container_port}"
     }],
     "name": "${var.app_name}",
     "image": "${var.image_id}",   
-    "memory": 512,
-    "cpu": 256,
     "requiresCompatibilities": [
         "FARGATE"
     ]
@@ -46,8 +44,8 @@ resource "aws_ecs_service" "app" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
-    container_name   = "weather-app"
-    container_port   = 3000
+    container_name   = "${var.app_name}"
+    container_port   = var.container_port
   }
 
     network_configuration {
