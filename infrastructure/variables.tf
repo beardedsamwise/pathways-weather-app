@@ -41,7 +41,7 @@ variable "vpc_cidr" {
 
 variable "git_username" {
   description = "Name of the Github user where the CI/CD workflow is running"
-  type = string
+  type        = string
 }
 
 variable "image_id" {

@@ -4,5 +4,5 @@ provider "aws" {
     tags = var.tags
   }
 }
-# provider "godaddy" {
-# }
+provider "godaddy" {
+}
