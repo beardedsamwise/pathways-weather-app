@@ -31,3 +31,10 @@ module "weather-app" {
   task_cpu           = var.task_cpu
   desired_count      = var.desired_count
 }
+
+# create DNS record for beardedsamwise.co
+module "dns" {
+  source = "./modules/dns"
+  domain = "beardedsamwise"
+  fqdn   = module.weather-app.alb_fqdn
+}
