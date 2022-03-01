@@ -29,4 +29,5 @@ module "weather-app" {
   container_port     = var.container_port
   task_mem           = var.task_mem
   task_cpu           = var.task_cpu
+  desired_count      = var.desired_count
 }

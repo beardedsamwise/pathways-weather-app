@@ -40,3 +40,4 @@ app_name       = "weather-app"
 container_port = 3000
 task_mem       = 512
 task_cpu       = 256
+desired_count  = 1

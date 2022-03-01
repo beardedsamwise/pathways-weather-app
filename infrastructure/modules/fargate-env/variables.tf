@@ -47,3 +47,8 @@ variable "task_mem" {
   description = "The hard limit of memory units to present to the ECS task"
   type = number
 }
+
+variable "desired_count" {
+  description = "The desired number of container instances to instantiate"
+  type = number
+}
