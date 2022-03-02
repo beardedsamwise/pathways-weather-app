@@ -16,7 +16,7 @@ The solution has been updated with the following functionality:
 * Deployment of VPC and network constructs, and the required components to run the container on ECS
 * Configuration of Go Daddy DNS to configure a CNAME for beardedsamwise.co
 
-The application is now fully deployed and available at: [www.beardedsamwise.co](www.beardedsamwise.co)
+The application is now fully deployed and available at: [www.beardedsamwise.co](http://www.beardedsamwise.co)
 
 <br> 
 
