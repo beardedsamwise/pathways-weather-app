@@ -44,6 +44,7 @@ jobs:
       run: make run_apply  
 
   post_to_slack:
+    needs: terraform_apply
     runs-on: ubuntu-latest
     steps:
     - name: Post to a Slack channel
