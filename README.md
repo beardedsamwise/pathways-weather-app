@@ -22,11 +22,25 @@ Operational metrics are available on Datadog [here](https://p.datadoghq.com/sb/6
 
 <br> 
 
+## Infrastructure deployment workflow
+
+![Infrastructure Workflow](/images/weather_app_infra_workflow.png)
+
+<br>
+
+## Infrastructure deployment workflow
+
+![App Workflow](/images/weather_app_dev_workflow.png)
+
+<br>
+
 ## Architecture
 
 The high level architecture of the solution is as follows. The ALB and ECS instances each have a different security group attached allowing HTTP inbound to the ALB from anywhere, and TCP 3000 (though this is configurable using TF variables) from the ALB. For more information refer to [sg.tf](/infrastructure/modules/fargate-env/sg.tf).
 
 ![Network Diagram](/images/weather_app_diagram.png)
+
+<br>
 
 ## Working locally with Terraform
 
