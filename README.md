@@ -18,11 +18,13 @@ The solution has been updated with the following functionality:
 
 The application is now fully deployed and available at: [www.beardedsamwise.co](http://www.beardedsamwise.co)
 
+Operational metrics are available on Datadog [here](https://p.datadoghq.com/sb/6143a38f-99d8-11ec-846e-da7ad0900002-3db2da8e24d64f29a71b248ff47413de).
+
 <br> 
 
 ## Architecture
 
-The high level architecture of the solution is as follows. The ALB and ECS instances each have a different security group attached allowing HTTP inbound to the ALB from anywhere, and TCP 3000 from the ALB. For more information refer to [sg.tf](/infrastructure/modules/fargate-env/sg.tf).
+The high level architecture of the solution is as follows. The ALB and ECS instances each have a different security group attached allowing HTTP inbound to the ALB from anywhere, and TCP 3000 (though this is configurable using TF variables) from the ALB. For more information refer to [sg.tf](/infrastructure/modules/fargate-env/sg.tf).
 
 ![Network Diagram](/images/weather_app_diagram.png)
 
