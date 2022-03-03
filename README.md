@@ -15,6 +15,7 @@ The solution has been updated with the following functionality:
 * Github workflows to build and push the Node Weather App to Amazon ECR
 * Deployment of VPC and network constructs, and the required components to run the container on ECS
 * Configuration of Go Daddy DNS to configure a CNAME for beardedsamwise.co
+* Slack notifications at the end of Github Actions workflows 
 
 The application is now fully deployed and available at: [www.beardedsamwise.co](http://www.beardedsamwise.co)
 
@@ -28,7 +29,7 @@ Operational metrics are available on Datadog [here](https://p.datadoghq.com/sb/6
 
 <br>
 
-## Infrastructure deployment workflow
+## Application deployment workflow
 
 ![App Workflow](/images/weather_app_dev_workflow.png)
 
@@ -36,7 +37,9 @@ Operational metrics are available on Datadog [here](https://p.datadoghq.com/sb/6
 
 ## Architecture
 
-The high level architecture of the solution is as follows. The ALB and ECS instances each have a different security group attached allowing HTTP inbound to the ALB from anywhere, and TCP 3000 (though this is configurable using TF variables) from the ALB. For more information refer to [sg.tf](/infrastructure/modules/fargate-env/sg.tf).
+The high level architecture of the solution is as follows. The ALB and ECS instances each have a different security group attached allowing HTTP inbound to the ALB from anywhere, and TCP 3000 from the ALB. The application port is a configurable TF variable.
+
+For more information refer to [sg.tf](/infrastructure/modules/fargate-env/sg.tf).
 
 ![Network Diagram](/images/weather_app_diagram.png)
 
