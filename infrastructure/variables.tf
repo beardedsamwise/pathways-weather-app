@@ -75,6 +75,6 @@ variable "desired_count" {
 }
 
 variable "domain" {
-    description = "Top level domain to create the DNS record in"
-    type = string
+  description = "Top level domain to create the DNS record in"
+  type        = string
 }
