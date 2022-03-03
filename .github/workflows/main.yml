@@ -27,6 +27,7 @@ jobs:
     environment:
       name: approval
     needs: terraform_plan
+    continue-on-error: true
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
