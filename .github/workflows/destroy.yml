@@ -39,7 +39,7 @@ jobs:
       working-directory: ./infrastructure
       run: make run_destroy_apply 
   post_to_slack:
-    needs: terraform_apply
+    needs: terraform_destroy_apply
     runs-on: ubuntu-latest
     steps:
     - name: Post to a Slack channel

@@ -42,7 +42,7 @@ jobs:
           REPONAME: ${{ secrets.REPONAME }}
         run: make push
   post_to_slack:
-    needs: terraform_apply
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Post to a Slack channel
